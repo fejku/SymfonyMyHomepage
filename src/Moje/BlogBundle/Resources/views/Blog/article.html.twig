@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+  <div>{{ article.title }}</div>
+  <div>{{ article.content }}</div>
+  <div>{{ article.imageAddress }}</div>
+  
+   {{ form_start(addCommentForm) }}
+      {{ form_errors(addCommentForm) }}
+
+      <div>
+        {{ form_label(addCommentForm.author) }}
+        {{ form_errors(addCommentForm.author) }}
+        {{ form_widget(addCommentForm.author) }}
+      </div>
+      
+      <div>
+          {{ form_label(addCommentForm.content) }}
+          {{ form_errors(addCommentForm.content) }}
+          {{ form_widget(addCommentForm.content) }}
+      </div>
+
+      <div>
+          {{ form_widget(addCommentForm.save) }}
+      </div>
+      
+    {{ form_end(addCommentForm) }}
+  
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.author }}
+        {{ comment.content }} 
+        {{ comment.creationDate|date('Y-m-d') }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

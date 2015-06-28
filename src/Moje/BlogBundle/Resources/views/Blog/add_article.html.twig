@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+  
+    {{ form_start(addArticleForm) }}
+      {{ form_errors(addArticleForm) }}
+
+      <div>
+        {{ form_label(addArticleForm.title) }}
+        {{ form_errors(addArticleForm.title) }}
+        {{ form_widget(addArticleForm.title) }}
+      </div>
+      
+      <div>
+          {{ form_label(addArticleForm.content) }}
+          {{ form_errors(addArticleForm.content) }}
+          {{ form_widget(addArticleForm.content) }}
+      </div>
+
+      <div>
+          {{ form_label(addArticleForm.image_address) }}
+          {{ form_errors(addArticleForm.image_address) }}
+          {{ form_widget(addArticleForm.image_address) }}
+      </div>
+      
+      <div>
+          {{ form_widget(addArticleForm.save) }}
+      </div>
+      
+    {{ form_end(addArticleForm) }}
+  
+{% endblock %}

@@ -1,0 +1,13 @@
+moje_demo123_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MojeDemo123Bundle:Default:index }
+
+
+random:
+    path:     /random/{limit}
+    defaults: { _controller: MojeDemo123Bundle:Random:index }
+    
+moje:
+    path:   /moje/{param}/{param3}
+    defaults: { _controller: MojeDemo123Bundle:Moje:inn, color: green }
+    

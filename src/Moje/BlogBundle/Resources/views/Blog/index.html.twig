@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+  
+  <ul>
+    {% for article in articles %}
+      <li>
+        <a href="{{ path('show_article', { 'idArticle': article.id }) }}">{{ article.title }}</a>
+        {{ article.content }} 
+        {{ article.imageAddress }}
+        {{ article.creationDate|date('Y-m-d') }}
+        {{ article.comments|length }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if page != 1 %}  
+    <a href="{{ path('index', { 'page': (page - 1) }) }}">Poprzednia strona</a>
+  {% endif %}
+  {% if page != ilosc_stron %}
+    <a href="{{ path('index', { 'page': (page + 1) }) }}">Nastepna strona</a>
+  {% endif %}
+{% endblock %}

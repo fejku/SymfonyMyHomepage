@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+  <ul>
+    {% for wpis in wpisy %}
+      <li>{{ wpis.tytul }}, {{ wpis.tresc }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
