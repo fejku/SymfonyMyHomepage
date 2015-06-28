@@ -10,6 +10,10 @@
         {{ article.imageAddress }}
         {{ article.creationDate|date('Y-m-d') }}
         {{ article.comments|length }}
+        {% for tag in article.tags %}
+          {{ tag.name }}
+        {% endfor %}
+          
       </li>
     {% endfor %}
   </ul>

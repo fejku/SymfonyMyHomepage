@@ -23,6 +23,7 @@ class BlogController extends Controller
             ->select('Article', 'Comment')
             ->from('MojeBlogBundle:Article', 'Article')
             ->leftJoin('Article.comments', 'Comment')
+            ->leftJoin('Article.tags', 'Tag')
             ->setMaxResults($LIMIT_POSTOW_NA_STRONIE)
             ->setFirstResult(($page-1) * $LIMIT_POSTOW_NA_STRONIE)
         ;
@@ -94,11 +95,12 @@ class BlogController extends Controller
         
         $request = $this->get('request');
         
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) { 
             $form->submit($request);
-            if ($form->isValid()) {
+            if ($form->isValid()) {               
                 $em = $this->getDoctrine()
                     ->getEntityManager();
+                
                 $article->setCreationDate(new \DateTime());
                 $em->persist($article);
                 $em->flush();

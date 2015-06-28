@@ -3,6 +3,7 @@
 namespace Moje\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
  /**
   * @ORM\Entity
@@ -41,8 +42,18 @@ class Article {
      */
     protected $comments;
     
+
     /**
-     * @ORM\OneToMany(targetEntity="ArticleTag", mappedBy="fkArticle")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
+     * @ORM\JoinTable(
+     *  name="article_tag",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *  }
+     * )
      */
     protected $tags;
 
@@ -185,5 +196,50 @@ class Article {
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Moje\BlogBundle\Entity\Tag $tag
+     * @return Article
+     */
+    public function addTag(\Moje\BlogBundle\Entity\Tag $tag)
+    {
+//        $this->tags[] = $tags;
+//
+//        return $this;
+        if ($this->tags->contains($tag)) {
+            return;
+        }
+
+        $this->tags->add($tag);
+        $tag->addArticle($this);
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Moje\BlogBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Moje\BlogBundle\Entity\Tag $tag)
+    {
+//        $this->tags->removeElement($tags);
+        if (!$this->tags->contains($tag)) {
+            return;
+        }
+
+        $this->tags->removeElement($tag);
+        $tag->removeArticle($this);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
