@@ -44,7 +44,7 @@ class Article {
     
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist"})
      * @ORM\JoinTable(
      *  name="article_tag",
      *  joinColumns={
@@ -201,36 +201,24 @@ class Article {
     /**
      * Add tags
      *
-     * @param \Moje\BlogBundle\Entity\Tag $tag
+     * @param \Moje\BlogBundle\Entity\Tag $tags
      * @return Article
      */
-    public function addTag(\Moje\BlogBundle\Entity\Tag $tag)
+    public function addTag(\Moje\BlogBundle\Entity\Tag $tags)
     {
-//        $this->tags[] = $tags;
-//
-//        return $this;
-        if ($this->tags->contains($tag)) {
-            return;
-        }
+        $this->tags[] = $tags;
 
-        $this->tags->add($tag);
-        $tag->addArticle($this);
+        return $this;
     }
 
     /**
      * Remove tags
      *
-     * @param \Moje\BlogBundle\Entity\Tag $tag
+     * @param \Moje\BlogBundle\Entity\Tag $tags
      */
-    public function removeTag(\Moje\BlogBundle\Entity\Tag $tag)
+    public function removeTag(\Moje\BlogBundle\Entity\Tag $tags)
     {
-//        $this->tags->removeElement($tags);
-        if (!$this->tags->contains($tag)) {
-            return;
-        }
-
-        $this->tags->removeElement($tag);
-        $tag->removeArticle($this);
+        $this->tags->removeElement($tags);
     }
 
     /**

@@ -68,38 +68,24 @@ class Tag {
     /**
      * Add articles
      *
-     * @param \Moje\BlogBundle\Entity\Article $article
+     * @param \Moje\BlogBundle\Entity\Article $articles
      * @return Tag
      */
-    public function addArticle(\Moje\BlogBundle\Entity\Article $article)
+    public function addArticle(\Moje\BlogBundle\Entity\Article $articles)
     {
-//        $this->articles[] = $articles;
-//
-//        return $this;
-        if ($this->articles->contains($article)) {
-            return;
-        }
+        $this->articles[] = $articles;
 
-        $this->articles->add($article);
-        $article->addTag($this);
-
+        return $this;
     }
 
     /**
      * Remove articles
      *
-     * @param \Moje\BlogBundle\Entity\Article $article
+     * @param \Moje\BlogBundle\Entity\Article $articles
      */
-    public function removeArticle(\Moje\BlogBundle\Entity\Article $article)
+    public function removeArticle(\Moje\BlogBundle\Entity\Article $articles)
     {
-//        $this->articles->removeElement($articles);
-        if (!$this->articles->contains($article)) {
-            return;
-        }
-
-        $this->articles->removeElement($article);
-        $article->removeTag($this);
-
+        $this->articles->removeElement($articles);
     }
 
     /**

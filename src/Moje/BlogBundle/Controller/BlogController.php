@@ -13,6 +13,9 @@ use Moje\BlogBundle\Entity\Comment;
 use Moje\BlogBundle\Form\Type\ArticleType;
 use Moje\BlogBundle\Form\Type\CommentType;
 
+//Do usuniecia?!
+use Moje\BlogBundle\Entity\Tag;
+
 class BlogController extends Controller
 {
     public function indexAction($page) {
@@ -91,6 +94,13 @@ class BlogController extends Controller
     
     public function addArticleAction() {
         $article = new Article();
+        $tag1 = new Tag();
+        $tag1->setName('Tag1');
+        $article->getTags()->add($tag1);
+        $tag2 = new Tag();
+        $tag2->setName('Tag2');
+        $article->getTags()->add($tag2);
+        
         $form = $this->createForm(new ArticleType, $article);
         
         $request = $this->get('request');
