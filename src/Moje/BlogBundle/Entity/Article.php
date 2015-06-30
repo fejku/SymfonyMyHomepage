@@ -206,9 +206,12 @@ class Article {
      */
     public function addTag(\Moje\BlogBundle\Entity\Tag $tags)
     {
-        $this->tags[] = $tags;
-
-        return $this;
+//        $this->tags[] = $tags;
+        if(!$this->tags->contains($tags)){
+            $this->tags->add($tags);
+        }
+            
+        return $this->tags;
     }
 
     /**
@@ -218,7 +221,11 @@ class Article {
      */
     public function removeTag(\Moje\BlogBundle\Entity\Tag $tags)
     {
-        $this->tags->removeElement($tags);
+        if($this->tags->contains($tags)) {
+            $this->tags->removeElement($tags);
+        }
+        
+        return $this->tags;
     }
 
     /**
@@ -229,5 +236,17 @@ class Article {
     public function getTags()
     {
         return $this->tags;
+    }
+    
+        /**
+     * Set tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function setTags(Collection $tags)
+    {
+        $this->tags = $tags;
+        
+        return $this;
     }
 }
