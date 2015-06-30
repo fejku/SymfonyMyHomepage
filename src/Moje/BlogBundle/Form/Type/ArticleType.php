@@ -18,6 +18,8 @@ class ArticleType extends AbstractType
             ->add('image_address', 'text')
             ->add('tags', 'collection', array(
                 'type' => new TagType(),
+                'prototype' => true,
+                'allow_add'    => true,
             ))
             ->add('save', 'submit')
         ;

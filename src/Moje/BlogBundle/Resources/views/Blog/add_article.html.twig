@@ -2,7 +2,7 @@
 
 {% block body %}
   
-    {{ form_start(addArticleForm) }}
+     {{ form_start(addArticleForm) }}
       {{ form_errors(addArticleForm) }}
 
       <div>
@@ -22,11 +22,29 @@
           {{ form_errors(addArticleForm.image_address) }}
           {{ form_widget(addArticleForm.image_address) }}
       </div>
-      
+
+      <h3>Tags</h3>
+      <ul class="tags" data-prototype="{{ form_widget(addArticleForm.tags.vars.prototype)|e }}">
+          {# iterate over each existing tag and render its only field: name #}
+          {% for tag in addArticleForm.tags %}
+              <li>{{ form_row(tag.name) }}</li>
+          {% endfor %}
+      </ul>
+
       <div>
           {{ form_widget(addArticleForm.save) }}
       </div>
       
     {{ form_end(addArticleForm) }}
   
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('bootstrap-3.3.5/js/tags.js') }}"></script>
+{#  {% javascripts
+    '@MojeBlogBundle/Resources/public/js/tags.js'
+    filter='?yui_js' combine=true %}
+  <script src="{{ assert_url }}"></script>
+  {% endjavascripts %}#}
 {% endblock %}

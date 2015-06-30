@@ -101,7 +101,10 @@ class BlogController extends Controller
         $tag2->setName('Tag2');
         $article->getTags()->add($tag2);
         
-        $form = $this->createForm(new ArticleType, $article);
+        $form = $this->createForm(new ArticleType, $article, array(
+            'action' => $this->generateUrl('add_article'),
+            'method' => 'POST'
+        ));
         
         $request = $this->get('request');
         
