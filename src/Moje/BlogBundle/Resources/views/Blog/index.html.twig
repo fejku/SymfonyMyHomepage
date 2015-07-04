@@ -24,4 +24,5 @@
   {% if page != ilosc_stron %}
     <a href="{{ path('index', { 'page': (page + 1) }) }}">Nastepna strona</a>
   {% endif %}
+  <div><a href="{{ path('add_article') }}">Nowy artykul</a></div>
 {% endblock %}
