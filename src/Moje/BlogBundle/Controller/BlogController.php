@@ -94,12 +94,6 @@ class BlogController extends Controller
     
     public function addArticleAction() {
         $article = new Article();
-        $tag1 = new Tag();
-        $tag1->setName('Tag1');
-        $article->getTags()->add($tag1);
-        $tag2 = new Tag();
-        $tag2->setName('Tag2');
-        $article->getTags()->add($tag2);
         
         $form = $this->createForm(new ArticleType, $article, array(
             'action' => $this->generateUrl('add_article'),
