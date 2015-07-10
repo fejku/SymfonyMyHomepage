@@ -1,0 +1,6 @@
+{% extends 'MojeBlogBundle::layout.html.twig' %}
+
+{% block logowanie %}
+  <a href="{{ path('fos_user_registration_register') }}">Rejestracja</a>
+  <a href="{{ path('fos_user_security_login') }}">Logowanie</a>
+{% endblock %}

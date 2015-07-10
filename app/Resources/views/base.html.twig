@@ -9,7 +9,9 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+          {% block logowanie %}{% endblock %}
+        {% endblock %}
         {% block javascripts %}
           <script src="{{ asset('bootstrap-3.3.5/js/jquery-1.11.3.min.js') }}"></script>
           <script src="{{ asset('bootstrap-3.3.5/js/bootstrap.min.js') }}"></script>

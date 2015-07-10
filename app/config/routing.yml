@@ -2,5 +2,5 @@ moje_blog:
     resource: "@MojeBlogBundle/Resources/config/routing.yml"
     prefix:   /
     
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+_user_bundle:
+    resource: "@UserBundle/Resources/config/routing.yml"

@@ -1,7 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'MojeBlogBundle::layout.html.twig' %}
 
-{% block body %}
-  
+{% block content %}
+{#  {{ parent() }}#}
   <ul>
     {% for article in articles %}
       <li>
