@@ -61,11 +61,18 @@ class Article {
      * @ORM\Column(type="integer")
      */
     protected $visitsNumber;
+    
+     /**
+      * @ORM\ManyToOne(targetEntity="Moje\UserBundle\Entity\User", inversedBy="id")
+      * @ORM\JoinColumn(name="fk_article_user", referencedColumnName="id")
+      */
+    protected $fkArticleUser;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->visitsNumber = 0;
     }
 
     /**
@@ -300,5 +307,28 @@ class Article {
         $this->visitsNumber--;
         
         return $this;
+    }
+
+    /**
+     * Set fkArticleUser
+     *
+     * @param \Moje\UserBundle\Entity\User $fkArticleUser
+     * @return Article
+     */
+    public function setFkArticleUser(\Moje\UserBundle\Entity\User $fkArticleUser = null)
+    {
+        $this->fkArticleUser = $fkArticleUser;
+
+        return $this;
+    }
+
+    /**
+     * Get fkArticleUser
+     *
+     * @return \Moje\UserBundle\Entity\User 
+     */
+    public function getFkArticleUser()
+    {
+        return $this->fkArticleUser;
     }
 }

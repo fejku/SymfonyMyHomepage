@@ -19,7 +19,7 @@ use Moje\BlogBundle\Entity\Tag;
 class BlogController extends Controller
 {
     public function indexAction($page) {
-        $LIMIT_POSTOW_NA_STRONIE = 2;
+        $LIMIT_POSTOW_NA_STRONIE = 5;
         
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQueryBuilder()
@@ -27,6 +27,7 @@ class BlogController extends Controller
             ->from('MojeBlogBundle:Article', 'Article')
             ->leftJoin('Article.comments', 'Comment')
             ->leftJoin('Article.tags', 'Tag')
+            ->leftJoin('Article.fkArticleUser', 'User')
             ->setMaxResults($LIMIT_POSTOW_NA_STRONIE)
             ->setFirstResult(($page-1) * $LIMIT_POSTOW_NA_STRONIE)
         ;
@@ -113,6 +114,8 @@ class BlogController extends Controller
                     ->getManager();
                 
                 $article->setCreationDate(new \DateTime());
+                $user = $this->container->get('security.context')->getToken()->getUser();
+                $article->setFkArticleUser($user);
                 $em->persist($article);
                 $em->flush();
 
