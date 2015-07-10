@@ -61,6 +61,9 @@ class BlogController extends Controller
             throw $this->createNotFoundException('There are no article with id:'.$idArticle.'.');
         }
         
+        $em = $this->getDoctrine()
+                    ->getManager();
+        
         $comments = $article->getComments();
         
         // Form for new comment
@@ -72,8 +75,6 @@ class BlogController extends Controller
         if ($request->isMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
-                $em = $this->getDoctrine()
-                    ->getEntityManager();
                 $comment->setFkCommentArticle($article);
                 $comment->setCreationDate(new \DateTime());
                 $em->persist($comment);
@@ -85,6 +86,9 @@ class BlogController extends Controller
             }
         }
 
+        $article->incrementVisitsNumber();
+        $em->flush();
+        
         return $this->render('MojeBlogBundle:Blog:article.html.twig', array(
             'article' => $article,
             'addCommentForm' => $form->createView(),
@@ -106,7 +110,7 @@ class BlogController extends Controller
             $form->submit($request);
             if ($form->isValid()) {               
                 $em = $this->getDoctrine()
-                    ->getEntityManager();
+                    ->getManager();
                 
                 $article->setCreationDate(new \DateTime());
                 $em->persist($article);
