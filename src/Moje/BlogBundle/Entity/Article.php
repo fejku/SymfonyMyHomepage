@@ -56,6 +56,11 @@ class Article {
      * )
      */
     protected $tags;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $visitsNumber;
 
     public function __construct()
     {
@@ -246,6 +251,53 @@ class Article {
     public function setTags(Collection $tags)
     {
         $this->tags = $tags;
+        
+        return $this;
+    }
+    
+    /**
+     * Set visitsNumber
+     *
+     * @param string $visitsNumber
+     * @return Article
+     */
+    public function setVisitsNumber($visitsNumber)
+    {
+        $this->visitsNumber = $visitsNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get visitsNumber
+     *
+     * @return integer 
+     */
+    public function getVisitsNumber()
+    {
+        return $this->visitsNumber;
+    }
+    
+    /**
+     * Increment visitsNumber
+     *
+     * @return integer 
+     */
+    public function incrementVisitsNumber()
+    {
+        $this->visitsNumber++;
+        
+        return $this;
+    }
+    
+    /**
+     * Decrement visitsNumber
+     *
+     * @return integer 
+     */
+    public function decrementVisitsNumber()
+    {
+        $this->visitsNumber--;
         
         return $this;
     }
